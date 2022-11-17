@@ -1,0 +1,28 @@
+﻿<Window x:Class="TemperatureConverter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TemperatureConverter"
+        mc:Ignorable="d"
+        DataContext="{Binding Path=MainWindowViewModel, Source={StaticResource ServiceLocator}}"
+        Title="Temperature Converter" Height="600" Width="800" Icon="Resources/icons8-thermometer-40.png" 
+        Background="#FF101225">
+   
+    <Grid>
+        <Grid Grid.IsSharedSizeScope="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            <Image Source="/TemperatureConverter;component/Resources/icons8-temperature-low-100.png" Grid.Row="1"/>
+            <StackPanel Grid.Row="2" HorizontalAlignment="Stretch">
+                <TextBlock Text="Celsius to Fahrenheit Converter" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Top" FontSize="32" Margin="5,0" FontFamily="Segoe UI"/>
+                <TextBlock Text="Enter the value in Celsius or Fahrenheit" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Top" FontSize="16" Margin="5,0" FontFamily="Segoe UI"/>
+            </StackPanel>
+            <ContentControl Content="{Binding ContentViewModel}" HorizontalAlignment="Center" Grid.Row="3"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="TemperatureConverter.Views.TemperatureView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TemperatureConverter.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" >
+    <UserControl.Resources>
+        <Style x:Key="PrimaryTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border CornerRadius="3" Padding="4">
+                            <ScrollViewer Name="PART_ContentHost" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="CaretBrush">
+                <Setter.Value>
+                    <SolidColorBrush Color="White"></SolidColorBrush>
+                </Setter.Value>                
+            </Setter>          
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="SwapButtonStyle">
+            <Setter Property="Background" Value="#373737" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <Image Source="/TemperatureConverter;component/Resources/icons8-transaction-100.png"/>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E59400" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#E59400" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Margin="20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBox x:Name="EditableTextBox" Style="{StaticResource PrimaryTextBox}" BorderBrush="Transparent" FocusManager.IsFocusScope="True" Text="{Binding Path=ActiveTemp, UpdateSourceTrigger=PropertyChanged}" ToolTip="Enter value to convert" Background="Transparent" Foreground="White" FontSize="45" HorizontalAlignment="Center" VerticalAlignment="Bottom" Padding="0" Margin="0"/>
+            <Border Width="90" BorderBrush="White" BorderThickness="0,0,0,1" Grid.Row="1" VerticalAlignment="Top">
+            </Border>
+            <TextBlock Grid.Row="2" Foreground="White" Text="{Binding ActiveUnitType}" HorizontalAlignment="Center" FontSize="20"/>
+        </Grid >
+        <Button Style="{StaticResource SwapButtonStyle}" Grid.Column="1" VerticalAlignment="Center" Height="30" Width="30" Command="{Binding SwapCommand}"/>
+
+       
+        <Grid Grid.Column="2" Margin="20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="{Binding Path=InactiveTemp}" Background="Transparent" Foreground="White" FontSize="45" HorizontalAlignment="Center" VerticalAlignment="Bottom" Padding="0" Margin="0"/>
+            <Border Width="90" BorderBrush="White" BorderThickness="0,0,0,1" Grid.Row="1" VerticalAlignment="Top">
+            </Border>
+            <TextBlock Grid.Row="2" Foreground="White" Text="{Binding InActiveUnitType}" HorizontalAlignment="Center" FontSize="20"/>
+        </Grid>
+    </Grid>
+</UserControl>
